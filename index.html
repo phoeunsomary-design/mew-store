@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEW STORE - បញ្ចូលហ្គេមកម្ពុជា</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #FFF5F7; color: #333; padding-bottom: 90px; }
+        
+        .header { background: #fff; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #FFE4E8; position: sticky; top: 0; z-index: 100; }
+        .logo-box { display: flex; align-items: center; gap: 10px; }
+        .logo-circle { width: 40px; height: 40px; border-radius: 50%; background: #FF2D55; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; }
+        .logo-text h1 { font-size: 16px; color: #FF2D55; font-weight: 800; margin: 0; }
+        .logo-text p { font-size: 11px; color: #8E8E93; margin: 0; }
+        .tg-top-btn { width: 32px; height: 32px; border-radius: 50%; background: #FFF0F3; display: flex; align-items: center; justify-content: center; color: #FF2D55; text-decoration: none; font-size: 14px; }
+
+        .container { padding: 16px; max-width: 480px; margin: 0 auto; }
+
+        .back-btn { display: inline-flex; align-items: center; gap: 6px; color: #FF2D55; font-size: 13px; font-weight: 700; text-decoration: none; margin-bottom: 12px; cursor: pointer; background: #fff; padding: 8px 14px; border-radius: 12px; border: 1.5px solid #FFE4E8; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+
+        /* Banner matching IMG_2960 */
+        .banner { background: #fff; border-radius: 20px; padding: 14px; margin-bottom: 12px; border: 1.5px solid #FFE4E8; box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; align-items: center; gap: 12px; }
+        .banner-icon { width: 50px; height: 50px; background: #0B0E14; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .banner-info { flex: 1; }
+        .banner-top-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .server-country { font-size: 12px; color: #8E8E93; font-weight: 600; }
+        .status-badge-off { background: #FFE4E8; color: #FF3B30; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; }
+        .banner-title { font-size: 16px; font-weight: 800; color: #1C1C1E; margin-bottom: 6px; }
+        .tags-row { display: flex; gap: 4px; flex-wrap: wrap; }
+        .tag { background: #FFF0F3; color: #FF2D55; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; border: 1px solid #FFD6E0; }
+
+        /* Switcher buttons matching IMG_2960 */
+        .switcher-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+        .switch-btn { background: #fff; border: 1.5px solid #FFE4E8; border-radius: 14px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .switch-btn.active { background: #FF2D55; border-color: #FF2D55; color: #fff; }
+        .switch-btn.active .switch-badge { background: #fff; color: #FF2D55; }
+        .switch-btn.active span { color: #fff; }
+        .switch-badge { background: #FFE4E8; color: #FF3B30; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 6px; margin-left: auto; }
+        .switch-badge.active-badge { background: #fff; color: #FF2D55; }
+        .switch-icon { font-size: 14px; }
+        .switch-name { font-size: 12px; font-weight: 700; color: #1C1C1E; }
+
+        .section-title { font-size: 14px; font-weight: 700; color: #1C1C1E; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+        .step-num-circle { background: #FF2D55; color: #fff; width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+
+        .form-group { background: #fff; border-radius: 16px; padding: 14px; border: 1px solid #FFE4E8; margin-bottom: 14px; }
+        .input-row { display: flex; gap: 8px; margin-top: 8px; }
+        .input-field { flex: 1; border: 1px solid #E5E7EB; border-radius: 10px; padding: 10px 12px; font-size: 13px; outline: none; }
+        .btn-check { background: #FF2D55; color: #fff; border: none; padding: 0 16px; border-radius: 10px; font-weight: 600; font-size: 12px; cursor: pointer; }
+
+        .profile-card { background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px; padding: 10px; display: none; align-items: center; gap: 10px; margin-top: 10px; }
+        .profile-card.active { display: flex; }
+        .avatar-box { width: 34px; height: 34px; border-radius: 50%; background: #22C55E; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; }
+        .prof-info h4 { font-size: 12px; color: #111827; margin: 0; font-weight: 700; }
+        .prof-info p { font-size: 10px; color: #16A34A; margin: 0; font-weight: 600; }
+
+        .notice-box { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; font-size: 11px; color: #92400E; }
+        .notice-badge { background: #F59E0B; color: #fff; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; display: inline-block; margin-bottom: 6px; }
+        .notice-box ul { padding-left: 14px; }
+        .notice-box li { margin-bottom: 3px; line-height: 1.4; }
+
+        .qty-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .qty-box { display: flex; align-items: center; background: #F3F4F6; border-radius: 10px; padding: 2px 6px; gap: 8px; }
+        .qty-btn { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 1px solid #D1D5DB; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+        .qty-num { font-size: 12px; font-weight: 700; color: #111827; }
+
+        /* Item Cards matching IMG_2961 exactly */
+        .items-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .item-card { border: 1.5px solid #FFE4E8; border-radius: 14px; padding: 10px; text-align: center; cursor: pointer; background: #fff; position: relative; }
+        .item-card.selected { border-color: #FF2D55; background: #FFF0F3; }
+        
+        .item-logo-container { background: #0B0E14; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+        .roblox-logo-sq { width: 24px; height: 24px; background: #fff; border-radius: 6px; transform: rotate(-12deg); display: flex; align-items: center; justify-content: center; }
+        .roblox-logo-sq::after { content: ''; width: 9px; height: 9px; background: #0B0E14; border-radius: 2px; }
+
+        .item-name { font-size: 12px; font-weight: 700; color: #1F2937; margin-bottom: 2px; }
+        .item-price { font-size: 12px; font-weight: 800; color: #FF2D55; margin-bottom: 8px; }
+        .item-action { background: #FFE4E8; color: #FF2D55; border-radius: 8px; padding: 5px; font-size: 11px; font-weight: 700; display: block; width: 100%; text-align: center; }
+        .item-card.selected .item-action { background: #FF2D55; color: #fff; }
+
+        .pay-section { background: #FF2D55; color: #fff; border-radius: 16px; padding: 14px; margin-top: 14px; }
+        .pay-box { background: #fff; border-radius: 12px; padding: 12px; color: #111827; display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+        .pay-name { font-weight: 700; font-size: 12px; }
+        .pay-sub { font-size: 10px; color: #6B7280; }
+
+        .btn-submit { width: 100%; background: #111827; color: #fff; border: none; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 13px; margin-top: 12px; cursor: pointer; }
+
+        .page-view { display: none; }
+        .page-view.active { display: block; }
+
+        .live-chat { position: fixed; bottom: 20px; right: 20px; background: #FF2D55; color: #fff; border-radius: 30px; padding: 10px 16px; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 15px rgba(255, 45, 85, 0.4); z-index: 99; }
+        .chat-dot { width: 8px; height: 8px; background: #4CD964; border-radius: 50%; }
+
+        /* Modal matching IMG_2946 */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 16px; }
+        .modal.active { display: flex; }
+        .modal-content { background: #fff; border-radius: 24px; width: 100%; max-width: 360px; overflow: hidden; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.15); position: relative; }
+        .modal-close-x { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 18px; color: #8E8E93; cursor: pointer; }
+        .modal-header-box { padding: 20px 20px 10px 20px; }
+        .khqr-badge-tag { display: inline-block; background: #FFE4E8; color: #FF2D55; font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 8px; margin-bottom: 6px; letter-spacing: 0.5px; }
+        .modal-title-main { font-size: 16px; font-weight: 800; color: #1C1C1E; margin-bottom: 2px; }
+        .modal-sub-bank { font-size: 11px; color: #6B7280; font-weight: 600; margin-bottom: 14px; }
+        
+        .price-display-box { background: #FFF5F7; border: 1px solid #FFE4E8; border-radius: 16px; padding: 12px; margin: 0 20px 14px 20px; }
+        .price-label-sm { font-size: 11px; color: #6B7280; font-weight: 600; margin-bottom: 2px; }
+        .total-price { font-size: 20px; font-weight: 800; color: #FF2D55; margin-bottom: 2px; }
+        .total-khr { font-size: 12px; color: #6B7280; font-weight: 600; }
+
+        .qr-img-wrap { width: 200px; height: 200px; margin: 0 auto 12px auto; border: 2px solid #FFD6E0; border-radius: 16px; padding: 8px; background: #fff; display: flex; align-items: center; justify-content: center; }
+        .qr-img { width: 100%; height: 100%; object-fit: contain; }
+
+        .modal-footer-pad { padding: 0 20px 20px 20px; }
+        .scan-instruction { font-size: 11px; color: #6B7280; margin-bottom: 14px; line-height: 1.4; }
+        .btn-tg { display: block; width: 100%; background: #0088CC; color: #fff; text-decoration: none; padding: 11px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-bottom: 8px; box-shadow: 0 4px 10px rgba(0, 136, 204, 0.2); }
+        .btn-close { display: block; width: 100%; background: #F3F4F6; color: #374151; border: none; padding: 11px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo-box">
+            <div class="logo-circle">M</div>
+            <div class="logo-text">
+                <h1>MEW STORE</h1>
+                <p>បញ្ចូលហ្គេមកម្ពុជា</p>
+            </div>
+        </div>
+        <a href="https://t.me/yuriikleanyogurt" target="_blank" class="tg-top-btn">✈</a>
+    </div>
+
+    <div class="container">
+        <!-- Home View -->
+        <div id="home-view" class="page-view active">
+            <div class="banner">
+                <div class="banner-icon">
+                    <div class="roblox-logo-sq"></div>
+                </div>
+                <div class="banner-info">
+                    <div class="banner-top-row">
+                        <span class="server-country">Cambodia</span>
+                        <span class="status-badge-off" id="home-status-badge">Login OFF</span>
+                    </div>
+                    <div class="banner-title" id="home-title">Robux Send</div>
+                    <div class="tags-row">
+                        <span class="tag">⚡ Fast</span>
+                        <span class="tag">🔒 Secure</span>
+                        <span class="tag">🕒 24/7</span>
+                        <span class="tag">KHQR</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Switcher Buttons -->
+            <div class="switcher-row">
+                <div class="switch-btn" onclick="openService('login')">
+                    <span class="switch-icon">🔒</span>
+                    <div>
+                        <div class="switch-name">Robux Login</div>
+                    </div>
+                    <span class="switch-badge">OFF</span>
+                </div>
+
+                <div class="switch-btn active" onclick="openService('send')">
+                    <span class="switch-icon">✈</span>
+                    <div>
+                        <div class="switch-name" style="color:inherit;">Robux Send</div>
+                    </div>
+                    <span class="switch-badge active-badge">ACTIVE</span>
+                </div>
+            </div>
+
+            <!-- Service Option card to jump to Roblox Service -->
+            <div class="switcher-row" style="margin-top: -8px;">
+                <div class="switch-btn active" style="grid-column: span 2; background: #fff; color: #1C1C1E; border-color: #FFE4E8;" onclick="openService('service')">
+                    <span class="switch-icon">⚙️</span>
+                    <div>
+                        <div class="switch-name">Roblox Service (សេវាកម្មផ្សេងៗ)</div>
+                    </div>
+                    <span class="switch-badge" style="background: #FFE4E8; color: #FF2D55;">CLICK</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Robux Send View -->
+        <div id="send-view" class="page-view">
+            <a href="javascript:void(0);" class="back-btn" onclick="goHome()">← ត្រឡប់ទៅទំព័រដើម</a>
+
+            <div class="banner">
+                <div class="banner-icon">
+                    <div class="roblox-logo-sq"></div>
+                </div>
+                <div class="banner-info">
+                    <div class="banner-top-row">
+                        <span class="server-country">Cambodia</span>
+                        <span class="status-badge-off">Login OFF</span>
+                    </div>
+                    <div class="banner-title">Robux Send</div>
+                    <div class="tags-row">
+                        <span class="tag">⚡ Fast</span>
+                        <span class="tag">🔒 Secure</span>
+                        <span class="tag">🕒 24/7</span>
+                        <span class="tag">KHQR</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="switcher-row">
+                <div class="switch-btn" onclick="alert('សេវាកម្ម Robux Login កំពុងបិទ!')">
+                    <span class="switch-icon">🔒</span>
+                    <div><div class="switch-name">Robux Login</div></div>
+                    <span class="switch-badge">OFF</span>
+                </div>
+                <div class="switch-btn active">
+                    <span class="switch-icon">✈</span>
+                    <div><div class="switch-name" style="color:inherit;">Robux Send</div></div>
+                    <span class="switch-badge active-badge">ACTIVE</span>
+                </div>
+            </div>
+
+            <div class="notice-box">
+                <span class="notice-badge">កំណត់សម្គាល់</span>
+                <ul>
+                    <li>បញ្ចូល Roblox Username (មិនមែន Display Name)</li>
+                    <li>Robux ចូលស្វ័យប្រវត្តក្នុង ១-២ នាទី</li>
+                    <li>ក្នុងមួយថ្ងៃអាចទិញបាន 500 Robux/ថ្ងៃ (អតិបរមា 1000 Robux/ខែ)</li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <div class="section-title">
+                    <span class="step-num-circle">1</span> បញ្ចូលព័ត៌មាន
+                </div>
+                <div style="font-size:11px; color:#6B7280; margin-bottom:4px;">ROBLOX USERNAME</div>
+                <div class="input-row">
+                    <input type="text" id="user-send" class="input-field" placeholder="ឧ. PlayerName123">
+                    <button class="btn-check" type="button" onclick="checkUser()">Check</button>
+                </div>
+                <div id="prof-send" class="profile-card">
+                    <div class="avatar-box">✓</div>
+                    <div class="prof-info">
+                        <h4 id="prof-name">CHKO_KLOP</h4>
+                        <p>ID: 4521293705 • គណនីត្រឹមត្រូវ Verified ✅</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="qty-header">
+                    <div class="section-title" style="margin-bottom:0;">
+                        <span class="step-num-circle">2</span> ជ្រើសកញ្ចប់
+                    </div>
+                    <div class="qty-box">
+                        <span style="font-size:10px; color:#6B7280; font-weight:600;">ចំនួន</span>
+                        <button class="qty-btn" type="button" onclick="changeQty(-1)">-</button>
+                        <span class="qty-num" id="qty-val">1</span>
+                        <button class="qty-btn" type="button" onclick="changeQty(1)">+</button>
+                    </div>
+                </div>
+
+                <div class="items-grid" style="margin-top:10px;">
+                    <div class="item-card selected" onclick="selectItem(this, 0.55)">
+                        <div class="item-logo-container">
+                            <div class="roblox-logo-sq"></div>
+                        </div>
+                        <div class="item-name">50 Robux</div>
+                        <div class="item-price">$0.55</div>
+                        <div class="item-action">បានជ្រើសរើស</div>
+                    </div>
+                    <div class="item-card" onclick="selectItem(this, 1.00)">
+                        <div class="item-logo-container">
+                            <div class="roblox-logo-sq"></div>
+                        </div>
+                        <div class="item-name">100 Robux</div>
+                        <div class="item-price">$1.00</div>
+                        <div class="item-action">+ ជ្រើស</div>
+                    </div>
+                    <div class="item-card" onclick="selectItem(this, 4.50)">
+                        <div class="item-logo-container">
+                            <div class="roblox-logo-sq"></div>
+                        </div>
+                        <div class="item-name">500 Robux</div>
+                        <div class="item-price">$4.50</div>
+                        <div class="item-action">+ ជ្រើស</div>
+                    </div>
+                    <div class="item-card" onclick="selectItem(this, 9.30)">
+                        <div class="item-logo-container">
+                            <div class="roblox-logo-sq"></div>
+                        </div>
+                        <div class="item-name">1000 Robux</div>
+                        <div class="item-price">$9.30</div>
+                        <div class="item-action">+ ជ្រើស</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pay-section">
+                <div style="font-size:13px; font-weight:700; margin-bottom:8px;">🛒 ជ្រើសការទូទាត់ (Acleda QR)</div>
+                <div style="font-size:11px; margin-bottom:4px; opacity:0.9;">កូដបញ្ចុះតម្លៃ (ជម្រើស)</div>
+                <div class="input-row" style="margin-top:0;">
+                    <input type="text" class="input-field" placeholder="កូដបញ្ចុះតម្លៃ" style="background:#fff; color:#333; border:none;">
+                    <button class="btn-check" type="button" style="background:#111827; color:#fff;">ប្រើ</button>
+                </div>
+                <div class="pay-box">
+                    <div>
+                        <div class="pay-name">PHOEUN SOPANHA</div>
+                        <div class="pay-sub">ACLEDA / BAKONG KHQR</div>
+                    </div>
+                    <div style="color:#FF2D55; font-weight:bold; font-size:16px;">✔</div>
+                </div>
+                <button class="btn-submit" type="button" onclick="showQR()">ទូទាត់ប្រាក់ឥឡូវនេះ</button>
+            </div>
+        </div>
+
+        <!-- Roblox Service View -->
+        <div id="service-view" class="page-view">
+            <a href="javascript:void(0);" class="back-btn" onclick="goHome()">← ត្រឡប់ទៅទំព័រដើម</a>
+
+            <div class="banner">
+                <div class="banner-icon">
+                    <div class="roblox-logo-sq"></div>
+                </div>
+                <div class="banner-info">
+                    <div class="banner-top-row">
+                        <span class="server-country">Cambodia</span>
+                        <span class="status-badge-off" style="background: #E0F2FE; color: #0284C7;">ACTIVE</span>
+                    </div>
+                    <div class="banner-title">Roblox Service</div>
+                    <div class="tags-row">
+                        <span class="tag">⚡ Fast</span>
+                        <span class="tag">🔒 Secure</span>
+                        <span class="tag">🕒 24/7</span>
+                        <span class="tag">KHQR</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notice-box">
+                <span class="notice-badge">កំណត់សម្គាល់</span>
+                <ul>
+                    <li>បញ្ចូល Roblox Username របស់អ្នកឱ្យបានត្រឹមត្រូវ</li>
+                    <li>សេវាកម្មរហ័សទាន់ចិត្ត សុវត្ថិភាពខ្ពស់</li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <div class="section-title">
+                    <span class="step-num-circle">1</span> បញ្ចូលព័ត៌មាន
+                </div>
+                <div style="font-size:11px; color:#6B7280; margin-bottom:4px;">ROBLOX USERNAME</div>
+                <div class="input-row">
+                    <input type="text" id="user-service" class="input-field" placeholder="ឧ. PlayerName123">
+                    <button class="btn-check" type="button" onclick="checkUserService()">Check</button>
+                </div>
+                <div id="prof-service" class="profile-card">
+                    <div class="avatar-box">✓</div>
+                    <div class="prof-info">
+                        <h4 id="prof-name-srv">CHKO_KLOP</h4>
+                        <p>ID: 4521293705 • គណនីត្រឹមត្រូវ Verified ✅</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="qty-header">
+                    <div class="section-title" style="margin-bottom:0;">
+                        <span class="step-num-circle">2</span> ជ្រើសរើសសេវាកម្ម
+                    </div>
+                    <div class="qty-box">
+                        <span style="font-size:10px; color:#6B7280; font-weight:600;">ចំនួន</span>
+                        <button class="qty-btn" type="button" onclick="changeQty(-1)">-</button>
+                        <span class="qty-num" id="qty-val-srv">1</span>
+                        <button class="qty-btn" type="button" onclick="changeQty(1)">+</button>
+                    </div>
+                </div>
+
+                <div class="items-grid" style="margin-top:10px;">
+                    <div class="item-card selected" onclick="selectItem(this, 1.00)">
+                        <div class="item-logo-container">
+                            <div class="roblox-logo-sq"></div>
+                        </div>
+                        <div class="item-name">ខោះ: Select</div>
+                        <div class="item-price">$1.00</div>
+                        <div class="item-action">បានជ្រើសរើស</div>
+                    </div>
+                    <div class="item-card" onclick="selectItem(this, 1.50)">
+                        <div class="item-logo-container">
+                            <div class="roblox-logo-sq"></div>
+                        </div>
+                        <div class="item-name">ខោះ: Unchecked</div>
+                        <div class="item-price">$1.50</div>
+                        <div class="item-action">+ ជ្រើស</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pay-section">
+                <div style="font-size:13px; font-weight:700; margin-bottom:8px;">🛒 ជ្រើសការទូទាត់ (Acleda QR)</div>
+                <div style="font-size:11px; margin-bottom:4px; opacity:0.9;">កូដបញ្ចុះតម្លៃ (ជម្រើស)</div>
+                <div class="input-row" style="margin-top:0;">
+                    <input type="text" class="input-field" placeholder="កូដបញ្ចុះតម្លៃ" style="background:#fff; color:#333; border:none;">
+                    <button class="btn-check" type="button" style="background:#111827; color:#fff;">ប្រើ</button>
+                </div>
+                <div class="pay-box">
+                    <div>
+                        <div class="pay-name">PHOEUN SOPANHA</div>
+                        <div class="pay-sub">ACLEDA / BAKONG KHQR</div>
