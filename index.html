@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEW STORE - Top Up</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Khmer OS Battambang', 'Segoe UI', Tahoma, sans-serif;
+    }
+    body {
+      background-color: #1a0508;
+      color: #fff;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+    }
+    .main-container {
+      width: 100%;
+      max-width: 480px;
+      background: #4a0e17;
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      border: 1px solid #7a1c2a;
+    }
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #6b1724;
+      padding-bottom: 12px;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      border: 2px solid #ff477e;
+      border-radius: 50%;
+    }
+    .store-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #ff477e;
+    }
+    .store-subtitle {
+      font-size: 11px;
+      color: #aaa;
+    }
+    /* Section 1: Username */
+    .section-box {
+      background: #5c121d;
+      border: 2px solid #7a1c2a;
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .username-input-group {
+      display: flex;
+      gap: 8px;
+    }
+    .text-input {
+      flex: 1;
+      padding: 10px 14px;
+      background: #3b0a11;
+      border: 2px solid #7a1c2a;
+      color: white;
+      border-radius: 12px;
+      outline: none;
+      font-size: 13px;
+    }
+    .check-btn {
+      background-color: #d9203d;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .verified-box {
+      display: none;
+      background: #3b0a11;
+      border: 2px solid #d9203d;
+      border-radius: 12px;
+      padding: 10px;
+      margin-top: 10px;
+      align-items: center;
+      gap: 10px;
+    }
+    .verified-icon {
+      background: #28a745;
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    /* Section 2: Packages */
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .package-card {
+      background: #3b0a11;
+      border: 2px solid #7a1c2a;
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .discount-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: #d9203d;
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+    .package-badge-box {
+      background: #1a0508;
+      border-radius: 12px;
+      width: 55px;
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 8px;
+      border: 1px solid #5c121d;
+    }
+    .package-icon {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+    .package-name {
+      font-size: 13px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .package-price {
+      font-size: 13px;
+      color: #ffadb8;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .select-btn {
+      background-color: #d9203d;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: bold;
+      width: 100%;
+      cursor: pointer;
+    }
+    /* Section 3: Payment */
+    .payment-section {
+      background: #d9203d;
+      border-radius: 16px;
+      padding: 16px;
+      color: white;
+      margin-top: 16px;
+    }
+    .payment-title {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    /* Modal Popup Success */
+    .success-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .modal-content {
+      background: #4a0e17;
+      color: white;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 24px;
+      padding: 20px;
+      border: 2px solid #d9203d;
+      text-align: center;
+    }
+    .topup-another-btn {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 24px;
+      padding: 10px;
+      width: 100%;
+      font-weight: bold;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-container">
+    
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-area">
+        <div class="logo-circle"></div>
+        <div>
+          <div class="store-title">MEW STORE</div>
+          <div class="store-subtitle">បំពេញហ្គេមរុករក</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. Username Section -->
+    <div class="section-box">
+      <div class="section-title">① បញ្ចូលព័ត៌មានគណនី</div>
+      <div style="font-size: 11px; color: #aaa; margin-bottom: 6px;">ROBLOX USERNAME</div>
+      <div class="username-input-group">
+        <input type="text" id="usernameInput" class="text-input" placeholder="Username របស់អ្នក">
+        <button class="check-btn" id="checkBtn">Check</button>
+      </div>
+      <!-- Verified Box -->
+      <div class="verified-box" id="verifiedBox">
+        <div class="verified-icon">✓</div>
+        <div>
+          <div id="verifiedName" style="font-weight: bold; font-size: 13px; color: #fff;"></div>
+          <div style="font-size: 11px; color: #28a745;">គណនីត្រឹមត្រូវ Verified ✓</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Packages Section -->
+    <div style="margin-bottom: 16px;">
+      <div class="section-title">② ជ្រើសរើសកញ្ចប់ (Select Package)</div>
+
+      <div class="packages-grid">
+        
+        <!-- កញ្ចប់ទី ១ -->
+        <div class="package-card">
+          <div class="discount-badge">-6%</div>
+          <div class="package-badge-box">
+            <img src="https://tr.rbxcdn.com/3930438cf2a5cb82ea389f38f1aa039f/150/150/Image/Png" alt="Robux Icon" class="package-icon">
+          </div>
+          <div class="package-name">80 Robux</div>
+          <div class="package-price">$0.95</div>
+          <button class="select-btn">+ Add</button>
+        </div>
+
+        <!-- កញ្ចប់ទី ២ -->
+        <div class="package-card">
+          <div class="discount-badge">-9%</div>
+          <div class="package-badge-box">
+            <img src="https://tr.rbxcdn.com/3930438cf2a5cb82ea389f38f1aa039f/150/150/Image/Png" alt="Robux Icon" class="package-icon">
+          </div>
+          <div class="package-name">500 Robux</div>
+          <div class="package-price">$4.69</div>
+          <button class="select-btn">+ Add</button>
+        </div>
+
+        <!-- កញ្ចប់ទី ៣ -->
+        <div class="package-card">
+          <div class="discount-badge">-9%</div>
+          <div class="package-badge-box">
+            <img src="https://tr.rbxcdn.com/3930438cf2a5cb82ea389f38f1aa039f/150/150/Image/Png" alt="Robux Icon" class="package-icon">
+          </div>
+          <div class="package-name">1,500 Robux</div>
+          <div class="package-price">$13.49</div>
+          <button class="select-btn">+ Add</button>
+        </div>
+
+        <!-- កញ្ចប់ទី ៤ -->
+        <div class="package-card">
+          <div style="position: absolute; top: 8px; left: 8px; font-size: 9px; color: #ffadb8; font-weight: bold;">Free 80 Robux</div>
+          <div class="package-badge-box" style="margin-top: 14px;">
+            <img src="https://tr.rbxcdn.com/3930438cf2a5cb82ea389f38f1aa039f/150/150/Image/Png" alt="Robux Icon" class="package-icon">
+          </div>
+          <div class="package-name" style="font-size: 11px;">Robux Plus 3 ថ្ងៃ</div>
+          <div class="package-price">$13.50</div>
+          <button class="select-btn">+ Add</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 3. Payment Section -->
+    <div class="payment-section">
+      <div class="payment-title">🛒 ជ្រើសការទូទាត់ (Acleda QR)</div>
+      <div style="font-size: 12px; margin-bottom: 6px;">កូដបញ្ចុះតម្លៃ (ជម្រើស)</div>
+      <input type="text" class="text-input" placeholder="កូដបញ្ចុះតម្លៃ" style="background: white; color: #333; width: 100%; margin-bottom: 10px;">
+    </div>
+
+  </div>
+
+  <!-- Success Modal Popup -->
+  <div class="success-modal" id="successModal">
+    <div class="modal-content">
+      <div style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Payment Successful</div>
+      <p style="font-size: 12px; margin-bottom: 20px; color: #ffadb8;">Your transaction has been successfully completed.</p>
+      <button class="topup-another-btn" id="topUpAnotherBtn">Top up another</button>
+    </div>
+  </div>
+
+  <script>
+    // មុខងារពេលចុច Check Username
+    document.getElementById('checkBtn').addEventListener('click', function() {
+      const username = document.getElementById('usernameInput').value.trim();
+      if(username !== '') {
+        document.getElementById('verifiedName').innerText = username;
+        document.getElementById('verifiedBox').style.display = 'flex';
+      }
+    });
+
+    // មុខងារពេលចុច Top up another ដើម្បីសម្អាតទិន្នន័យត្រឡប់ទៅដើមវិញ
+    document.getElementById('topUpAnotherBtn').addEventListener('click', function() {
+      document.getElementById('successModal').style.display = 'none';
+      document.getElementById('usernameInput').value = '';
+      document.getElementById('verifiedBox').style.display = 'none';
+      
+      const selectButtons = document.querySelectorAll('.select-btn');
+      selectButtons.forEach(btn => {
+        btn.innerText = '+ Add';
+        btn.style.backgroundColor = '#d9203d';
+      });
+    });
+  </script>
+
+</body>
+</html>
