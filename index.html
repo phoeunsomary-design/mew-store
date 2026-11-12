@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MEW STORE - បញ្ចូលហ្គេមកម្ពុជា</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #FFF0F5; color: #333; padding-bottom: 90px; }
+        
+        .header { background: #fff; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #FFD6E8; position: sticky; top: 0; z-index: 100; }
+        .logo-box { display: flex; align-items: center; gap: 10px; }
+        .logo-circle { width: 42px; height: 42px; border-radius: 50%; border: 2px solid #FF1493; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .logo-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .logo-text h1 { font-size: 16px; color: #FF1493; font-weight: 900; margin: 0; }
+        .logo-text p { font-size: 11px; color: #8E8E93; margin: 0; }
+        .tg-top-btn { width: 36px; height: 36px; border-radius: 50%; background: #FFE4E1; display: flex; align-items: center; justify-content: center; color: #FF1493; text-decoration: none; font-size: 16px; }
+
+        .container { padding: 16px; max-width: 480px; margin: 0 auto; }
+
+        .hero-pink-card { background: linear-gradient(135deg, #FF1493, #FF4500); border-radius: 20px; padding: 16px; color: #fff; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(255, 20, 147, 0.25); }
+        .hero-status-row { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
+        .status-pill { background: rgba(255,255,255,0.25); padding: 2px 8px; border-radius: 10px; text-transform: uppercase; }
+        .hero-title { font-size: 17px; font-weight: 900; margin-bottom: 6px; }
+        .hero-sub { font-size: 11px; opacity: 0.95; line-height: 1.4; }
+
+        .announcement-strip { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 12px; padding: 10px 12px; font-size: 11px; color: #92400E; display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-weight: 600; }
+
+        .section-header-title { font-size: 14px; font-weight: 800; color: #FF1493; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+
+        .services-menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+        .menu-card { background: #fff; border: 1.5px solid #FFD6E8; border-radius: 18px; padding: 16px 12px; cursor: pointer; transition: 0.2s; position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .menu-card:active { transform: scale(0.96); border-color: #FF1493; background: #FFF0F3; }
+        
+        .badge-tag { position: absolute; top: -8px; left: 12px; background: #FF1493; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 8px; border-radius: 8px; }
+        .badge-tag.off { background: #EF4444; }
+
+        .menu-icon-box { background: #0B0E14; width: 100%; height: 75px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-top: 6px; margin-bottom: 10px; }
+        .roblox-logo-sq-lg { width: 30px; height: 30px; background: #fff; border-radius: 6px; transform: rotate(-12deg); display: flex; align-items: center; justify-content: center; }
+        .roblox-logo-sq-lg::after { content: ''; width: 10px; height: 10px; background: #0B0E14; border-radius: 2px; }
+
+        .menu-title { font-size: 13px; font-weight: 800; color: #1C1C1E; margin-bottom: 2px; }
+        .menu-desc { font-size: 10px; font-weight: 700; color: #FF1493; }
+        .menu-desc.off-text { color: #8E8E93; }
+
+        #detail-workflow { display: none; }
+        .back-menu-btn { background: #fff; border: 1.5px solid #FFD6E8; color: #FF1493; padding: 12px; border-radius: 12px; font-weight: 800; font-size: 13px; width: 100%; cursor: pointer; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .back-menu-btn:active { background: #FFE4E1; }
+
+        .banner { background: #fff; border-radius: 20px; padding: 14px; margin-bottom: 16px; border: 1.5px solid #FFD6E8; box-shadow: 0 4px 12px rgba(255,20,147,0.05); display: flex; align-items: center; gap: 12px; }
+        .banner-icon { width: 50px; height: 50px; background: #0B0E14; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid #C0C0C0; }
+        .banner-info { flex: 1; }
+        .banner-top-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .server-country { font-size: 11px; color: #8E8E93; font-weight: 600; }
+        .status-badge { background: #E6F4EA; color: #137333; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; border: 1px solid #CEEAD6; }
+        .banner-title { font-size: 16px; font-weight: 800; color: #1C1C1E; margin-bottom: 6px; }
+        .tags-row { display: flex; gap: 4px; flex-wrap: wrap; }
+        .tag { background: #FFF0F5; color: #FF1493; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 6px; border: 1px solid #FFC0CB; }
+
+        .form-group { background: #fff; border-radius: 16px; padding: 14px; border: 1.5px solid #FFD6E8; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(255,20,147,0.02); }
+        .input-row { display: flex; gap: 8px; margin-top: 6px; }
+        .input-field { flex: 1; background: #fff; border: 1.5px solid #FFC0CB; border-radius: 10px; padding: 12px; font-size: 14px; color: #333; outline: none; }
+        .input-field:focus { border-color: #FF1493; }
+        .btn-check { background: #FF1493; color: #fff; border: none; padding: 0 18px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; }
+        .btn-check:active { opacity: 0.8; }
+
+        .profile-card { background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px; padding: 10px; display: none; align-items: center; gap: 10px; margin-top: 10px; }
+        .profile-card.active { display: flex; }
+        .avatar-box { width: 32px; height: 32px; border-radius: 50%; background: #22C55E; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px; }
+        .prof-info h4 { font-size: 12px; color: #111827; margin: 0; font-weight: 700; }
+        .prof-info p { font-size: 10px; color: #16A34A; margin: 0; font-weight: 600; }
+
+        .notice-box { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 14px; padding: 12px; margin-bottom: 14px; font-size: 11px; color: #92400E; }
+        .notice-badge { background: #F59E0B; color: #fff; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; display: inline-block; margin-bottom: 4px; }
+        .notice-box ul { padding-left: 14px; }
+        .notice-box li { margin-bottom: 2px; line-height: 1.4; }
+
+        .qty-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+        .qty-box { display: flex; align-items: center; background: #F3F4F6; border-radius: 10px; padding: 2px 6px; gap: 8px; border: 1px solid #E5E7EB; }
+        .qty-btn { width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 1px solid #D1D5DB; color: #333; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .qty-btn:active { background: #E5E7EB; }
+        .qty-num { font-size: 13px; font-weight: 700; color: #111827; padding: 0 4px; }
+
+        .items-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .item-card { border: 1.5px solid #FFD6E8; border-radius: 14px; padding: 12px; text-align: center; cursor: pointer; background: #fff; position: relative; }
+        .item-card.selected { border-color: #FF1493; background: #FFF0F3; }
+        .item-card:active { transform: scale(0.97); }
+        
+        .item-logo-container { background: radial-gradient(circle, #2b2b2b 0%, #111111 100%); height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; border: 1.5px solid #C0C0
