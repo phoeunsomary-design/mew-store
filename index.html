@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEW STORE</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: #FFF5F5; color: #333; padding-bottom: 50px; }
+        .header { background: #fff; padding: 15px; text-align: center; border-bottom: 2px solid #FFD1D1; font-weight: bold; color: #C53030; font-size: 18px; }
+        .container { padding: 16px; max-width: 480px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .card { background: #fff; border: 2px solid #FFD1D1; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; }
+        .card:active { background: #FFF5F5; border-color: #C53030; }
+        .title { font-size: 14px; font-weight: bold; color: #333; margin-top: 8px; }
+        .price { font-size: 12px; color: #C53030; font-weight: bold; margin-top: 4px; }
+        #detail { display: none; margin-top: 20px; background: #fff; padding: 20px; border-radius: 12px; border: 2px solid #FFD1D1; }
+        .back-btn { background: #C53030; color: #fff; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; margin-bottom: 15px; font-weight: bold; }
+        .input-box { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; margin-top: 10px; font-size: 14px; }
+        .submit-btn { width: 100%; background: #22C55E; color: #fff; border: none; padding: 12px; border-radius: 8px; margin-top: 15px; font-weight: bold; cursor: pointer; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">MEW STORE - ហាងទិញទំនិញ</div>
+
+    <div class="container">
+        <!-- ម៉ឺនុយដើម -->
+        <div id="main-menu">
+            <h3 style="color: #C53030; margin-bottom: 10px;">សូមជ្រើសរើសសេវាកម្ម</h3>
+            <div class="grid">
+                <div class="card" onclick="selectService('Robux Send', 0.55)">
+                    <div style="font-size: 24px;">💎</div>
+                    <div class="title">Robux Send</div>
+                    <div class="price">ចាប់ពី $0.55</div>
+                </div>
+                <div class="card" onclick="selectService('Roblox Service', 1.00)">
+                    <div style="font-size: 24px;">⚙️</div>
+                    <div class="title">Roblox Service</div>
+                    <div class="price">ចាប់ពី $1.00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ទំព័រលម្អិតពេលចុចកាត -->
+        <div id="detail">
+            <button class="back-btn" onclick="goBack()">← ត្រឡប់ក្រោយ</button>
+            <h3 id="serv-title" style="color: #C53030;">សេវាកម្ម</h3>
+            <p id="serv-price" style="font-size: 13px; color: #666; margin-top: 4px;"></p>
+            
+            <div style="margin-top: 15px;">
+                <label style="font-size: 12px; font-weight: bold;">Roblox Username:</label>
+                <input type="text" id="username" class="input-box" placeholder="បញ្ចូលឈ្មោះរបស់អ្នក...">
+            </div>
+
+            <button class="submit-btn" onclick="checkout()">បន្តការទូទាត់ប្រាក់</button>
+        </div>
+    </div>
+
+    <script>
+        var selectedGame = "";
+        var selectedPrice = 0;
+
+        function selectService(name, price) {
+            selectedGame = name;
+            selectedPrice = price;
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById('detail').style.display = 'block';
+            document.getElementById('serv-title').innerText = name;
+            document.getElementById('serv-price').innerText = "តម្លៃ: $" + price;
+        }
+
+        function goBack() {
+            document.getElementById('detail').style.display = 'none';
+            document.getElementById('main-menu').style.display = 'block';
+        }
+
+        function checkout() {
+            var user = document.getElementById('username').value.trim();
+            if (!user) {
+                alert('សូមបញ្ចូល Roblox Username ជាមុនសិន!');
+                return;
+            }
+            alert('បញ្ជាទិញជោគជ័យសម្រាប់: ' + user + ' ទឹកប្រាក់: $' + selectedPrice);
+        }
+    </script>
+</body>
+</html>
