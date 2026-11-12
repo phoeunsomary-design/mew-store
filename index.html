@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MEW STORE - បញ្ចូលហ្គេមកម្ពុជា</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #FFF5F5; color: #333; padding-bottom: 90px; }
+        
+        .header { background: #fff; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #FFD1D1; position: sticky; top: 0; z-index: 100; }
+        .logo-box { display: flex; align-items: center; gap: 10px; }
+        .logo-circle { width: 42px; height: 42px; border-radius: 50%; border: 2px solid #C53030; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .logo-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .logo-text h1 { font-size: 16px; color: #C53030; font-weight: 900; margin: 0; }
+        .logo-text p { font-size: 11px; color: #8E8E93; margin: 0; }
+        
+        .header-actions { display: flex; align-items: center; gap: 8px; }
+        .header-chat-btn { background: #FED7D7; color: #C53030; border: none; padding: 8px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+        .tg-top-btn { width: 36px; height: 36px; border-radius: 50%; background: #FED7D7; display: flex; align-items: center; justify-content: center; color: #C53030; text-decoration: none; font-size: 16px; }
+
+        .container { padding: 16px; max-width: 480px; margin: 0 auto; }
+
+        .hero-pink-card { background: linear-gradient(135deg, #9B2C2C, #C53030); border-radius: 20px; padding: 16px; color: #fff; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(197, 48, 48, 0.3); }
+        .hero-status-row { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
+        .status-pill { background: rgba(255,255,255,0.25); padding: 2px 8px; border-radius: 10px; text-transform: uppercase; }
+        .hero-title { font-size: 17px; font-weight: 900; margin-bottom: 6px; }
+        .hero-sub { font-size: 11px; opacity: 0.95; line-height: 1.4; }
+
+        .announcement-strip { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 12px; padding: 10px 12px; font-size: 11px; color: #92400E; display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-weight: 600; }
+
+        .section-header-title { font-size: 14px; font-weight: 800; color: #C53030; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+
+        .services-menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+        .menu-card { background: #fff; border: 1.5px solid #FFD1D1; border-radius: 18px; padding: 16px 12px; cursor: pointer; transition: 0.2s; position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: auto; }
+        .menu-card:active { transform: scale(0.96); border-color: #C53030; background: #FFF5F5; }
+        
+        .badge-tag { position: absolute; top: -8px; left: 12px; background: #C53030; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 8px; border-radius: 8px; }
+        .badge-tag.off { background: #EF4444; }
+
+        .menu-icon-box { background: #0B0E14; width: 100%; height: 75px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-top: 6px; margin-bottom: 10px; pointer-events: none; }
+        .roblox-logo-sq-lg { width: 30px; height: 30px; background: #fff; border-radius: 6px; transform: rotate(-12deg); display: flex; align-items: center; justify-content: center; }
+        .roblox-logo-sq-lg::after { content: ''; width: 10px; height: 10px; background: #0B0E14; border-radius: 2px; }
+
+        .menu-title { font-size: 13px; font-weight: 800; color: #1C1C1E; margin-bottom: 2px; pointer-events: none; }
+        .menu-desc { font-size: 10px; font-weight: 700; color: #C53030; pointer-events: none; }
+        .menu-desc.off-text { color: #8E8E93; }
+
+        #detail-workflow { display: none; }
+        .back-menu-btn { background: #fff; border: 1.5px solid #FFD1D1; color: #C53030; padding: 12px; border-radius: 12px; font-weight: 800; font-size: 13px; width: 100%; cursor: pointer; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .back-menu-btn:active { background: #FED7D7; }
+
+        .banner { background: #fff; border-radius: 20px; padding: 14px; margin-bottom: 16px; border: 1.5px solid #FFD1D1; box-shadow: 0 4px 12px rgba(197,48,48,0.05); display: flex; align-items: center; gap: 12px; }
+        .banner-icon { width: 50px; height: 50px; background: #0B0E14; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid #C0C0C0; }
+        .banner-info { flex: 1; }
+        .banner-top-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .server-country { font-size: 11px; color: #8E8E93; font-weight: 600; }
+        .status-badge { background: #E6F4EA; color: #137333; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; border: 1px solid #CEEAD6; }
+        .banner-title { font-size: 16px; font-weight: 800; color: #1C1C1E; margin-bottom: 6px; }
+        .tags-row { display: flex; gap: 4px; flex-wrap: wrap; }
+        .tag { background: #FFF5F5; color: #C53030; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 6px; border: 1px solid #FEB2B2; }
+
+        .form-group { background: #fff; border-radius: 16px; padding: 14px; border: 1.5px solid #FFD1D1; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(197,48,48,0.02); }
+        .input-row { display: flex; gap: 8px; margin-top: 6px; }
+        .input-field { flex: 1; background: #fff; border: 1.5px solid #FEB2B2; border-radius: 10px; padding: 12px; font-size: 14px; color: #333; outline: none; }
+        .input-field:focus { border-color: #C53030; }
+        .btn-check { background: #C53030; color: #fff; border: none; padding: 0 18px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; }
+        .btn-check:active { opacity: 0.8; }
+
+        .profile-card { background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px; padding: 10px; display: none; align-items: center; gap: 10px; margin-top: 10px; }
+        .profile-card.active { display: flex; }
+        .avatar-box { width: 32px; height: 32px; border-radius: 50%; background: #22C55E; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px; }
+        .prof-info h4 { font-size: 12px; color: #111827; margin: 0; font-weight: 700; }
+        .prof-info p { font-size: 10px; color: #16A34A; margin: 0; font-weight: 600; }
+
+        .notice-box { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 14px; padding: 12px; margin-bottom: 14px; font-size: 11px; color: #92400E; }
+        .notice-badge { background: #F59E0B; color: #fff; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; display: inline-block; margin-bottom: 4px; }
+        .notice-box ul { padding-left: 14px; }
+        .notice-box li { margin-bottom: 2px; line-height: 1.4; }
+
+        .qty-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+        .qty-box { display: flex; align-items: center; background: #F3F4F6; border-radius: 10px; padding: 2px 6px; gap: 8px; border: 1px solid #E5E7EB; }
+        .qty-btn { width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 1px solid #D1D5DB; color: #333; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .qty-btn:active { background: #E5E7EB; }
+        .qty-num { font-size: 13px; font-weight: 700; color: #111827; padding: 0 4px; }
+
+        .items-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .item-card { border: 1.5px solid #FFD1D1; border-radius: 14px; padding: 12px; text-align: center; cursor: pointer; background: #fff; position: relative; pointer-events: auto; }
+        .item-card * { pointer-events: none; } /* ကာពារមិនឱ្យកូនធាតុបាំងប៊ូតុងចុច */
+        .item-card.selected { border-color: #C53030; background: #FFF5F5; }
+        .item-card:active { transform: scale(0.97); }
+        
+        .item-logo-container { background: radial-gradient(circle, #2b2b2b 0%, #111111 100%); height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; border: 1.5px solid #C0C0C0; }
+        .item-name { font-size: 11px; font-weight: 700; color: #1F2937; margin-bottom: 2px; }
+        .item-price { font-size: 12px; font-weight: 800; color: #C53030; margin-bottom: 6px; }
+        .item-action { background: #FED7D7; color: #C53030; border-radius: 8px; padding: 6px; font-size: 10px; font-weight: 700; display: block; width: 100%; text-align: center; }
+        .item-card.selected .item-action { background: #C53030; color: #fff; }
+
+        .pay-section { background: #C53030; color: #fff; border-radius: 16px; padding: 14px; margin-top: 14px; box-shadow: 0 4px 15px rgba(197, 48, 48, 0.4); }
+        .pay-box { background: #fff; border-radius: 12px; padding: 10px 12px; color: #111827; display: flex; align-items: center; justify-content: space-between; margin-top: 8px; border: 1px solid #FFD1D1; }
+        .pay-name { font-weight: 700; font-size: 12px; }
+        .pay-sub { font-size: 10px; color: #6B7280; }
+
+        .btn-submit { width: 100%; background: #111827; color: #fff; border: none; padding: 14px; border-radius: 12px; font-weight: 800; font-size: 14px; margin-top: 12px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .btn-submit:active { opacity: 0.85; transform: scale(0.99); }
+
+        /* LIVE CHAT BUTTON & WIDGET */
+        .live-chat-btn { background: #FED7D7; color: #C53030; border: none; padding: 8px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+        .chat-dot { width: 8px; height: 8px; background: #22C55E; border-radius: 50%; }
+
+        .chat-widget-box { display: none; position: fixed; bottom: 20px; right: 20px; width: 320px; max-width: 90vw; background: #fff; border-radius: 20px; border: 1.5px solid #C53030; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden; flex-direction: column; }
+        .chat-widget-box.active { display: flex; }
+        .chat-header { background: #C53030; color: #fff; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; font-weight: 800; font-size: 14px; }
+        .chat-close-x { background: none; border: none; color: #fff; font-size: 18px; cursor: pointer; }
+        .chat-body { padding: 12px; height: 260px; overflow-y: auto; background: #FFF5F5; display: flex; flex-direction: column; gap: 8px; font-size: 12px; }
+        .chat-msg { max-width: 80%; padding: 8px 12px; border-radius: 12px; line-height: 1.4; word-break: break-word; }
+        .chat-msg.admin { background: #fff; color: #333; border: 1px solid #FFD1D1; align-self: flex-start; }
+        .chat-msg.user { background: #C53030; color: #fff; align-self: flex-end; }
+        .chat-footer { padding: 10px; background: #fff; border-top: 1px solid #FFD1D1; display: flex; gap: 6px; }
+        .chat-input { flex: 1; border: 1px solid #FFD1D1; border-radius: 8px; padding: 8px; font-size: 12px; outline: none; }
+        .chat-send-btn { background: #C53030; color: #fff; border: none; padding: 0 14px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 12px; }
+
+        /* Modal QR */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 16px; }
+        .modal.active { display: flex; }
+        .modal-content { background: #fff; border: 1.5px solid #C53030; border-radius: 24px; width: 100%; max-width: 360px; overflow: hidden; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.15); position: relative; color: #333; }
+        .modal-close-x { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 20px; color: #8E8E93; cursor: pointer; padding: 6px; }
+        .modal-header-box { padding: 20px 20px 8px 20px; }
+        .khqr-badge-tag { display: inline-block; background: #FED7D7; color: #C53030; font-size: 10px; font-weight: 800; padding: 3px 12px; border-radius: 8px; margin-bottom: 8px; }
+        .modal-title-main { font-size: 16px; font-weight: 800; color: #1C1C1E; margin-bottom: 2px; }
+        .modal-sub-bank { font-size: 11px; color: #6B7280; font-weight: 600; margin-bottom: 12px; }
+        
+        .price-display-box { background: #FFF5F5; border: 1px solid #FFD1D1; border-radius: 16px; padding: 12px; margin: 0 20px 14px 20px; }
+        .price-label-sm { font-size: 11px; color: #6B7280; font-weight: 600; margin-bottom: 2px; }
+        .total-price { font-size: 20px; font-weight: 800; color: #C53030; margin-bottom: 2px; }
+        .total-khr { font-size: 12px; color: #6B7280; font-weight: 600; }
+
+        .qr-img-wrap { width: 200px; height: 200px; margin: 0 auto 12px auto; border: 2px solid #C53030; border-radius: 16px; padding: 8px; background: #fff; display: flex; align-items: center; justify-content: center; }
+        .qr-img { width: 100%; height: 100%; object-fit: contain; }
+
+        .modal-footer-pad { padding: 0 20px 20px 20px; }
+        .scan-instruction { font-size: 11px; color: #6B7280; margin-bottom: 14px; line-height: 1.4; }
+        .btn-tg { display: block; width: 100%; background: #0088CC; color: #fff; text-decoration: none; padding: 13px; border-radius: 12px; font-size: 13px; font-weight: 700; margin-bottom: 8px; text-align: center; }
+        .btn-close { display: block; width: 100%; background: #F3F4F6; color: #374151; border: 1px solid #E5E7EB; padding: 13px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; text-align: center; }
+
+        /* SUCCESS MODAL */
+        .success-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1100; align-items: center; justify-content: center; padding: 16px; }
+        .success-modal.active { display: flex; }
+        .success-content { background: linear-gradient(135deg, #4A0508, #2A0304); border: 2px solid #FF334B; border-radius: 24px; width: 100%; max-width: 380px; padding: 20px; text-align: center; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; }
+        .success-icon-circle { width: 50px; height: 50px; background: #22C55E; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto; font-size: 24px; color: #fff; box-shadow: 0 0 15px rgba(34,197,94,0.4); }
+        .success-title { font-size: 18px; font-weight: 900; margin-bottom: 4px; }
+        .success-sub { font-size: 11px; color: #D1D5DB; margin-bottom: 16px; }
+        
+        .receipt-box { background: rgba(255,255,255,0.07); border-radius: 14px; padding: 12px; text-align: left; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.1); }
+        .receipt-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; }
+        .receipt-row:last-child { margin-bottom: 0; }
+        .receipt-label { color: #D1D5DB; }
+        .receipt-val { font-weight: 700; color: #fff; }
+        .copy-btn-sm { background: #5C0B10; color: #FFA3AC; border: 1px solid #7A1218; padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer; }
+
+        .telegram-alert-box { background: rgba(255, 51, 75, 0.15); border: 1px solid #FF334B; border-radius: 12px; padding: 10px; font-size: 11px; margin-bottom: 14px; display: flex; gap: 8px; align-items: center; text-align: left; }
+        .telegram-alert-icon { font-size: 20px; color: #FF334B; }
+        
+        .btn-tg-success { display: block; width: 100%; background: #FF334B; color: #fff; text-decoration: none; padding: 13px; border-radius: 12px; font-weight: 800; font-size: 13px; margin-bottom: 8px; text-align: center; box-shadow: 0 4px 12px rgba(255,51,75,0.3); }
+        .btn-another { display: block; width: 100%; background: #2A0304; color: #D1D5DB; border: 1px solid #5C0B10; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 13px; cursor: pointer; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo-box">
+            <div class="logo-circle">
+                <img src="IMG_2058.jpeg" alt="Logo">
+            </div>
+            <div class="logo-text">
+                <h1>MEW STORE</h1>
+                <p>បញ្ចូលហ្គេមកម្ពុជា</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="live-chat-btn" type="button" onclick="toggleChatWidget()">
+                <span class="chat-dot"></span> Live Chat
+            </button>
+            <a href="https://t.me/yuriikleanyogurt" target="_blank" class="tg-top-btn">✈</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- TOP SECTION WITH HERO & ANNOUNCEMENT -->
+        <div id="top-menu-section">
+            <div class="hero-pink-card">
+                <div class="hero-status-row">
+                    <span class="status-pill">ONLINE</span>
+                    <span>7:00 AM – 10:00 PM</span>
+                </div>
+                <div class="hero-title">MEW STORE — បញ្ចូលហ្គេមកម្ពុជា</div>
+                <div class="hero-sub">សេវាកម្ម Robux រហ័សទាន់ចិត្ត សុវត្ថិភាព 100% ជាមួយនិងប្រព័ន្ធស្វ័យប្រវត្ត 24 ម៉ោង</div>
+            </div>
+
+            <div class="announcement-strip">
+                <span>ទិញចាប់ពី 5 ដងឡើងទៅ នឹងមានការថែមជូន 50 Robux ភ្លាមៗ!</span>
+            </div>
+
+            <div class="section-header-title">
+                ជម្រើសសេវាកម្ម
+            </div>
+
+            <!-- 2-Column Menu Grid -->
+            <div class="services-menu-grid">
+                <div class="menu-card" onclick="openService('send')">
+                    <span class="badge-tag">ពេញនិយម</span>
+                    <div class="menu-icon-box">
+                        <div class="roblox-logo-sq-lg"></div>
+                    </div>
+                    <div class="menu-title">Robux Send</div>
+                    <div class="menu-desc">ចាប់ពី $0.55</div>
+                </div>
+
+                <div class="menu-card" onclick="openService('login')">
+                    <span class="badge-tag off">OFF</span>
+                    <div class="menu-icon-box">
+                        <div class="roblox-logo-sq-lg"></div>
+                    </div>
+                    <div class="menu-title">Robux Login</div>
+                    <div class="menu-desc off-text">បិទសេវាកម្ម</div>
+                </div>
+
+                <div class="menu-card" onclick="openService('service')">
+                    <span class="badge-tag">ពេញនិយម</span>
+                    <div class="menu-icon-box">
+                        <div class="roblox-logo-sq-lg"></div>
+                    </div>
+                    <div class="menu-title">Roblox Service</div>
+                    <div class="menu-desc">សេវាកម្មទូទៅ</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DETAILED WORKFLOW -->
+        <div id="detail-workflow">
+            <button class="back-menu-btn" type="button" onclick="backToMenu()">ត្រឡប់ទៅជ្រើសសេវាកម្ម</button>
+
+            <div class="banner">
+                <div class="banner-icon">
+                    <div class="roblox-logo-sq-lg"></div>
+                </div>
+                <div class="banner-info">
+                    <div class="banner-top-row">
+                        <span class="server-country">Cambodia Server</span>
+                        <span class="status-badge">ACTIVE</span>
+                    </div>
+                    <div class="banner-title" id="banner-title">Robux Send</div>
+                    <div class="tags-row">
+                        <span class="tag">Fast</span>
+                        <span class="tag">Secure</span>
+                        <span class="tag">24/7</span>
+                        <span class="tag">KHQR</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notice-box">
+                <span class="notice-badge">កំណត់សម្គាល់</span>
+                <ul>
+                    <li>សូមបញ្ចូល Roblox Username ឱ្យបានត្រឹមត្រូវមុនពេលទូទាត់ប្រាក់</li>
+                    <li>ប្រព័ន្ធនឹងផ្ទៀងផ្ទាត់ឈ្មោះគណនីរបស់អ្នកដោយស្វ័យប្រវត្ត</li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <div class="section-header-title" style="margin-bottom:8px; color:#1C1C1E;">
+                    <span style="background:#C53030; color:#fff; width:18px; height:18px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:10px;">1</span> បញ្ចូលព័ត៌មានគណនី
+                </div>
+                <div style="font-size:11px; color:#6B7280; margin-bottom:4px;">ROBLOX USERNAME</div>
+                <div class="input-row">
+                    <input type="text" id="user-input" class="input-field" placeholder="ឧ. PlayerName123">
+                    <button class="btn-check" type="button" onclick="checkUser()">Check</button>
+                </div>
+                <div id="prof-card" class="profile-card">
+                    <img id="prof-avatar" src="" alt="Avatar" style="width:36px; height:36px; border-radius:50%; object-fit:cover; display:none;">
+                    <div id="avatar-fallback" class="avatar-box">✓</div>
+                    <div class="prof-info">
+                        <h4 id="prof-name"></h4>
+                        <p id="prof-detail">គណនីត្រឹមត្រូវ Verified</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="qty-header">
+                    <div class="section-header-title" style="margin-bottom:0; color:#1C1C1E;">
+                        <span style="background:#C53030; color:#fff; width:18px; height:18px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:10px;">2</span> ជ្រើសកញ្ចប់ (Select Package)
+                    </div>
+                    <div class="qty-box">
+                        <span style="font-size:10px; color:#6B7280; font-weight:600;">ចំនួន</span>
+                        <button class="qty-btn" type="button" onclick="changeQty(-1)">-</button>
+                        <span class="qty-num" id="qty-val">1</span>
+                        <button class="qty-btn" type="button" onclick="changeQty(1)">+</button>
+                    </div>
+                </div>
+
+                <div class="items-grid" id="grid-send" style="margin-top:10px; display:none;">
+                    <div class="item-card selected" onclick="selectItem(this, 0.55, '50 Robux')">
+                        <div class="item-logo-container"><div class="roblox-logo-sq-lg" style="width:20px;height:20px;"></div></div>
+                        <div class="item-name">50 Robux</div>
+                        <div class="item-price">$0.55</div>
+                        <div class="item-action">បានជ្រើសរើស</div>
+                    </div>
+                    <div class="item-card" onclick="selectItem(this, 1.00, '100 Robux')">
+                        <div class="item-logo-container"><div class="roblox-logo-sq-lg" style="width:20px;height:20px;"></div></div>
+                        <div class="item-name">100 Robux</div>
+                        <div class="item-price">$1.00</div>
+                        <div class="item-action">+ ជ្រើស</div>
+                    </div>
+                    <div class="item-card" onclick="selectItem(this, 4.50, '500 Robux')">
+                        <div class="item-logo-container"><div class="roblox-logo-sq-lg" style="width:20px;height:20px;"></div></div>
+                        <div class="item-name">500 Robux</div>
+                        <div class="item-price">$4.50</div>
+                        <div class="item-action">+ ជ្រើស</div>
+                    </div>
+                    <div class="item-card" onclick="selectItem(this, 9.30, '1000 Robux')">
+                        <div class="item-logo-container"><div class="roblox-logo-sq-lg" style="width:20px;height:20px;"></div></div>
+                        <div class="item-name">1000 Robux</div>
+                        <div class="item-price">$9.30</div>
+                        <div class="item-action">+ ជ្រើស</div>
+                    </div>
+                </div>
+
+                <div class="items-grid" id="grid-service" style="margin-top:10px; display:none;">
+                    <div class="item-card selected" onclick="selectItem(this, 1.00, 'ដោះ: Select')">
+                        <div class="item-logo-container"><div class="roblox-logo-sq-lg" style="width:20px;height:20px;"></div></div>
+                        <div class="item-name">ដោះ: Select</div>
+                        <div class="item-price">$1.00</div>
+                        <div class="item-action">បានជ្រើសរើស</div>
+                    </div>
+                    <div class="item-card" onclick="selectItem(this, 1.50, 'ដោះ: Unchecked')">
+                        <div class="item-logo-container"><div class="roblox-logo-sq-lg" style="width:20px;height:20px;"></div></div>
+                        <div class="item-name">ដោះ: Unchecked</div>
+                        <div class="item-price">$1.50</div>
+                        <div class="item-action">+ ជ្រើស</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pay-section">
+                <div style="font-size:13px; font-weight:700; margin-bottom:8px;">ជ្រើសការទូទាត់ (Acleda QR)</div>
+                <div style="font-size:11px; margin-bottom:4px; opacity:0.9;">កូដបញ្ចុះតម្លៃ (ជម្រើស)</div>
+                <div class="input-row" style="margin-top:0;">
+                    <input type="text" class="input-field" placeholder="កូដបញ្ចុះតម្លៃ" style="background:#fff; color:#333;">
+                    <button class="btn-check" type="button" style="background:#111827; color:#fff;">ប្រើ</button>
+                </div>
+                <div class="pay-box">
+                    <div>
+                        <div class="pay-name">ACLEDA / BAKONG KHQR</div>
+                        <div class="pay-sub">ស្កែនទូទាត់ប្រាក់សុវត្ថិភាព</div>
+                    </div>
+                    <div style="color:#22C55E; font-weight:bold; font-size:16px;">✓</div>
+                </div>
+                <button class="btn-submit" type="button" onclick="showQR()">ទូទាត់ប្រាក់ឥឡូវនេះ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- KHQR Modal -->
+    <div id="modal-qr" class="modal">
+        <div class="modal-content">
+            <button class="modal-close-x" type="button" onclick="closeQR()">✕</button>
+            <div class="modal-header-box">
+                <span class="khqr-badge-tag">KHQR PAYMENT</span>
+                <div class="modal-title-main">ស្គេនទូទាត់ប្រាក់</div>
+                <div class="modal-sub-bank">ACLEDA BANK</div>
+            </div>
+
+            <div class="price-display-box">
+                <div class="price-label-sm">ទឹកប្រាក់សរុប</div>
+                <div class="total-price" id="qr-usd">$0.55</div>
+                <div class="total-khr" id="qr-khr">(~2,255 ៛)</div>
+            </div>
+
+            <div class="qr-img-wrap">
+                <img src="IMG_3094.jpeg" alt="KHQR Payment" class="qr-img">
+            </div>
+
+            <div class="modal-footer-pad">
+                <div class="scan-instruction">សូមថតរូបអេក្រង់ (Screenshot) ឬស្កែន QR នេះដើម្បីទូទាត់ប្រាក់</div>
+                <a href="https://t.me/yuriikleanyogurt" target="_blank" class="btn-tg">ផ្ញើវិក្កយបត្រទៅ Telegram</a>
+                <button class="btn-close" type="button" onclick="confirmPaymentDone()">រួចរាល់ / បិទ (Done)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAYMENT SUCCESSFUL MODAL -->
+    <div id="success-modal" class="success-modal">
+        <div class="success-content">
+            <div class="success-icon-circle">✓</div>
+            <div class="success-title">Payment Successful</div>
+            <div class="success-sub">Your transaction has been successfully completed.</div>
+
+            <div class="receipt-box">
+                <div class="receipt-row">
+                    <span class="receipt-label">Product</span>
+                    <span class="receipt-val" id="rec-product">50 Robux</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Total</span>
+                    <span class="receipt-val" id="rec-total">$0.55</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Game</span>
+                    <span class="receipt-val" id="rec-game">Robux Send</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">ID / Player</span>
+                    <span class="receipt-val" id="rec-player">PlayerName123</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Payment Method</span>
+                    <span class="receipt-val">ACLEDA KHQR</span>
+                </div>
+                <div class="receipt-row" style="align-items: center;">
+                    <span class="receipt-label">Order ID</span>
+                    <span style="display:flex; gap:4px; align-items:center;">
+                        <span class="receipt-val" id="rec-orderid" style="font-size:10px; color:#FFA3AC;">MEW52893714</span>
+                        <button class="copy-btn-sm" type="button" onclick="copyOrderId()">Copy</button>
+                    </span>
+                </div>
+                <div class="receipt-row" style="margin-top:8px; border-top:1px solid rgba(255,255,255,0.1); padding-top:6px;">
+                    <span class="receipt-label">Date</span>
+                    <span class="receipt-val" id="rec-date" style="font-size:10px;">Nov 12, 2026</span>
+                </div>
+            </div>
+
+            <div class="telegram-alert-box">
+                <div class="telegram-alert-icon">i</div>
+                <div style="font-size:10px; line-height:1.4;">
+                    <strong style="color:#fff; display:block; margin-bottom:2px;">ផ្ញើសារមកកាន់បុគ្គលិកយើងខ្ញុំ៖</strong>
+                    ចុចប៊ូតុងខាងក្រោម ដើម្បីផ្ញើសារដែលបានសរសេរទុកជាស្រេចៗ បុគ្គលិករបស់យើងនឹងដំណើរការ Robux ជូនអ្នកភ្លាមៗ។
+                </div>
+            </div>
+
+            <a id="tg-send-link" href="https://t.me/yuriikleanyogurt" target="_blank" class="btn-tg-success">ផ្ញើសារទៅ Telegram</a>
+            <button class="btn-another" type="button" onclick="closeSuccessModal()">Top up another</button>
+        </div>
+    </div>
+
+    <!-- LIVE CHAT WIDGET BOX -->
+    <div id="chat-widget" class="chat-widget-box">
+        <div class="chat-header">
+            <span>MEW STORE Support</span>
+            <button class="chat-close-x" type="button" onclick="toggleChatWidget()">✕</button>
+        </div>
+        <div id="chat-body" class="chat-body">
+            <div class="chat-msg admin">សួស្ដី! តើ MEW STORE អាចជួយអ្វីដល់អ្នកបានដែរ៛? បើមានចម្ងល់អាចសួរបានណា។</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input-field" class="chat-input" placeholder="សរសេរសារ..." onkeypress="handleChatKeyPress(event)">
+            <button class="chat-send-btn" type="button" onclick="sendUserMessage()">បញ្ជូន</button>
+        </div>
+    </div>
+
+    <script>
+        var currentPrice = 0.55;
+        var currentQty = 1;
+        var selectedItemName = '50 Robux';
+        var isUserChecked = false;
+        var activeType = 'send';
+        var generatedOrderId = '';
+
+        function openService(type) {
+            if(type === 'login') {
+                alert('សុំទោស! សេវាកម្ម Robux Login ត្រូវបានបិទជាបណ្ដោះអាសន្ន (OFF)។');
+                return;
+            }
+
+            activeType = type;
+            document.getElementById('top-menu-section').style.display = 'none';
+            document.getElementById('detail-workflow').style.display = 'block';
+
+            var bannerTitle = document.getElementById('banner-title');
+            var targetGridId = (type === 'send') ? 'grid-send' : 'grid-service';
+            
+            document.getElementById('grid-send').style.display = (type === 'send') ? 'grid' : 'none';
+            document.getElementById('grid-service').style.display = (type === 'service') ? 'grid' : 'none';
+
+            var cards = document.getElementById(targetGridId).querySelectorAll('.item-card');
+            cards.forEach((card, index) => {
+                if (index === 0) {
+                    card.classList.add('selected');
+                    card.querySelector('.item-action').innerText = 'បានជ្រើសរើស';
+                } else {
+                    card.classList.remove('selected');
+                    card.querySelector('.item-action').innerText = '+ ជ្រើស';
+                }
+            });
+
+            if(type === 'send') {
+                bannerTitle.innerText = 'Robux Send';
+                currentPrice = 0.55;
+                selectedItemName = '50 Robux';
+            } else if(type === 'service') {
+                bannerTitle.innerText = 'Roblox Service';
+                currentPrice = 1.00;
+                selectedItemName = 'ដោះ: Select';
+            }
+
+            currentQty = 1;
+            document.getElementById('qty-val').innerText = currentQty;
+        }
+
+        function backToMenu() {
+            document.getElementById('detail-workflow').style.display = 'none';
+            document.getElementById('top-menu-section').style.display = 'block';
+        }
+
+        function selectItem(el, price, name) {
+            var parent = el.parentElement;
+            var cards = parent.querySelectorAll('.item-card');
+            for(var i = 0; i < cards.length; i++) {
+                cards[i].classList.remove('selected');
+                cards[i].querySelector('.item-action').innerText = '+ ជ្រើស';
+            }
+            el.classList.add('selected');
+            el.querySelector('.item-action').innerText = 'បានជ្រើសរើស';
+            currentPrice = price;
+            selectedItemName = name;
+        }
+
+        async function checkUser() {
+            var username = document.getElementById('user-input').value.trim();
+            if(!username) {
+                alert('សូមបញ្ចូល Roblox Username ជាមុនសិន!');
+                return;
+            }
+
+            var profCard = document.getElementById('prof-card');
+            var profName = document.getElementById('prof-name');
+            var profAvatar = document.getElementById('prof-avatar');
+            var avatarFallback = document.getElementById('avatar-fallback');
+
+            profName.innerText = username;
+            profCard.classList.add('active');
+            isUserChecked = true;
+
+            try {
+                let response = await fetch(`https://users.roblox.com/v1/users/search?keyword=${encodeURIComponent(username)}&limit=1`);
+                let data = await response.json();
+                
+                if (data && data.data && data.data.length > 0) {
+                    let userId = data.data[0].id;
+                    let displayName = data.data[0].displayName;
+                    
+                    profName.innerText = `${displayName} (@${username})`;
+
+                    let thumbRes = await fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userId}&size=150x150&format=Png&isCircular=false`);
+                    let thumbData = await thumbRes.json();
+
+                    if (thumbData && thumbData.data && thumbData.data.length > 0) {
+                        let avatarUrl = thumbData.data[0].imageUrl;
+                        profAvatar.src = avatarUrl;
+                        profAvatar.style.display = 'block';
+                        avatarFallback.style.display = 'none';
+                    }
+                } else {
+                    profAvatar.style.display = 'none';
+                    avatarFallback.style.display = 'flex';
+                }
+            } catch (error) {
+                profAvatar.style.display = 'none';
+                avatarFallback.style.display = 'flex';
+            }
+        }
+
+        function changeQty(amount) {
+            currentQty += amount;
+            if(currentQty < 1) currentQty = 1;
+            document.getElementById('qty-val').innerText = currentQty;
+        }
+
+        function showQR() {
+            var username = document.getElementById('user-input').value.trim();
+            if(!username || !isUserChecked) {
+                alert('សូមបញ្ចូល និង Check Roblox Username ឱ្យបានត្រឹមត្រូវជាមុនសិន!');
+                return;
+            }
+            var totalUSD = (currentPrice * currentQty).toFixed(2);
+            var totalKHR = Math.round(totalUSD * 4100);
+            document.getElementById('qr-usd').innerText = '$' + totalUSD;
+            document.getElementById('qr-khr').innerText = '(~' + totalKHR.toLocaleString() + ' ៛)';
+
+            var randNum = Math.floor(100000000 + Math.random() * 900000000);
+            generatedOrderId = 'MEW' + randNum;
+
+            document.getElementById('modal-qr').classList.add('active');
+        }
+
+        function closeQR() {
+            document.getElementById('modal-qr').classList.remove('active');
+        }
+
+        function confirmPaymentDone() {
+            document.getElementById('modal-qr').classList.remove('active');
+            triggerSuccessState();
+        }
+
+        function triggerSuccessState() {
+            var username = document.getElementById('user-input').value.trim();
+            var totalUSD = (currentPrice * currentQty).toFixed(2);
+            var gameName = (activeType === 'send') ? 'Robux Send' : 'Roblox Service';
+
+            document.getElementById('rec-product').innerText = selectedItemName;
+            document.getElementById('rec-total').innerText = '$' + totalUSD;
+            document.getElementById('rec-game').innerText = gameName;
+            document.getElementById('rec-player').innerText = username;
+            document.getElementById('rec-orderid').innerText = generatedOrderId;
+            
+            var now = new Date();
+            var options = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true };
+            document.getElementById('rec-date').innerText = now.toLocaleDateString('en-US', options);
+
+            var tgText = 'សួស្ដីAdminខ្ញុំបានទូទាត់ប្រាក់រួចរាល់ហើយសូមចូលឆែកនិងដាក់Robuxអោយខ្ញំុផង\n- Order ID: ' + generatedOrderId + '\n- Game: ' + gameName + '\n- Product: ' + selectedItemName + ' (x' + currentQty + ')\n- Total: $' + totalUSD + '\n- Username: ' + username;
+            document.getElementById('tg-send-link').href = 'https://t.me/yuriikleanyogurt?text=' + encodeURIComponent(tgText);
+
+            document.getElementById('success-modal').classList.add('active');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('success-modal').classList.remove('active');
+            
+            document.getElementById('user-input').value = '';
+            document.getElementById('prof-card').classList.remove('active');
+            isUserChecked = false;
+            
+            backToMenu();
+        }
+
+        function copyOrderId() {
+            navigator.clipboard.writeText(generatedOrderId);
+            alert('Copied Order ID: ' + generatedOrderId);
+        }
+
+        /* LIVE CHAT JAVASCRIPT FUNCTIONS */
+        function toggleChatWidget() {
+            var widget = document.getElementById('chat-widget');
+            widget.classList.toggle('active');
+        }
+
+        function sendUserMessage() {
+            var input = document.getElementById('chat-input-field');
+            var text = input.value.trim();
+            if(!text) return;
+
+            var chatBody = document.getElementById('chat-body');
+
+            var userMsg = document.createElement('div');
+            userMsg.className = 'chat-msg user';
+            userMsg.innerText = text;
+            chatBody.appendChild(userMsg);
+
+            input.value = '';
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            setTimeout(function() {
+                var adminMsg = document.createElement('div');
+                adminMsg.className = 'chat-msg admin';
+                
+                var lowerText = text.toLowerCase();
+
+                if (lowerText.includes('hi b') || lowerText.includes('hello b') || lowerText.includes('ဟាយប')) {
+                    adminMsg.innerText = 'សួស្ដីបងសូមរង់ចាំបន្ដិចចាំខ្ញុំដាក់Robuxជូន🥹💕🙏🏻';
+                } else if (lowerText.includes('តម្លៃ') || lowerText.includes('robux') || lowerText.includes('ប៉ុន្មាន') || lowerText.includes('price')) {
+                    adminMsg.innerText = 'តម្លៃ Robux Send ចាប់ពី $0.55 ឡើងទៅ និង Roblox Service ចាប់ពី $1.00។ អ្នកអាចមើលតម្លៃលម្អិតនៅលើវេបសាយផ្ទាល់បានណា៛!';
+                } else if (lowerText.includes('ទូទាត់') || lowerText.includes('qr') || lowerText.includes('ACLEDA') || lowerText.includes('វេស')) {
+                    adminMsg.innerText = 'អ្នកអាចទូទាត់ប្រាក់តាមរយៈ ACLEDA KHQR ដោយស្កែន QR Code នៅពេលចុចប៊ូតុង "ទូទាត់ប្រាក់ឥឡូវនេះ" ស្របពេលកំពុងធ្វើការបញ្ជាទិញ!';
+                } else if (lowerText.includes('ម៉ោង') || lowerText.includes('បើក') || lowerText.includes('time')) {
+                    adminMsg.innerText = 'ហាងយើងខ្ញុំបើកដំណើរការជារៀងរាល់ថ្ងៃចាប់ពីម៉ោង 7:00 ព្រឹក ដល់ 10:00 យប់ (24/7 Auto System)។';
+                } else if (lowerText.includes('admin') || lowerText.includes('តេឡេក្រាម') || lowerText.includes('telegram') || lowerText.includes('មនុស្ស')) {
+                    adminMsg.innerText = 'អ្នកអាចទាក់ទងមកកាន់ Telegram ផ្ទាល់របស់ Admin បានតាមរយៈ Link នេះ: https://t.me/yuriikleanyogurt ណា៛!';
+                } else {
+                    adminMsg.innerText = 'អរគុណសម្រាប់ការទាក់ទងមក MEW STORE! Admin នឹងពិនិត្យ និងឆ្លើយតបអ្នកក្នុងរយៈពេលបន្តិចទៀតនេះ ឬអាចសាកសួរតាម Telegram @yuriikleanyogurt បានណា៛។';
+                }
+
+                chatBody.appendChild(adminMsg);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 800);
+        }
+
+        function handleChatKeyPress(e) {
+            if(e.key === 'Enter') {
+                sendUserMessage();
+            }
+        }
+    </script>
+</body>
+</html>
